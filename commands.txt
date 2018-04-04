@@ -1,0 +1,60 @@
+
+navigate to the dir, then
+docker build --tag tomcat .
+
+docker image ls
+root@docker:/opt# docker image ls
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+qa/tomcat           jdk-8               c28688d12c9f        6 days ago          706MB
+<none>              <none>              4f53987edf97        6 days ago          706MB
+qa/maven            3.3-jdk-8           c8b32e08d866        6 days ago          692MB
+qa/oracle-jvm       8                   eea868244ecb        6 days ago          682MB
+tomcat              latest              516082cd94fa        2 weeks ago         547MB
+phusion/baseimage   0.9.17              035cda81a0b6        2 years ago         238MB
+
+docker run tomcat
+
+## List Docker containers (running, all, all in quiet mode)
+docker container ls
+docker container ls --all
+docker container ls -aq
+
+root@docker:/opt# docker container ls -all
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                    PORTS               NAMES
+1d44897ff1d7        tomcat              "catalina.sh run"   6 days ago          Exited (143) 5 days ago                       uatTomcat
+
+
+docker run -p 4000:80 friendlyhello
+docker run -p 8080:80 tomcat
+
+finnovation@docker:~$ curl http://localhost:8080
+
+
+run in background
+docker run -d -p 4000:80 tomcat
+d485b8d4962ca52a6ddf4a474447b1237aed0a63baa4071c823ebeb7b3e63d7b stopped
+
+docker container stop 1fa4ab2cf395(container id)
+
+to access outside
+docker run -it --rm -p 8888:8080 tomcat
+
+
+-in foreground
+docker run -v /opt/dockerFile/tomcat/app.war:/usr/local/tomcat/webapps/app.war -it -p 8080:8080 tomcat
+-in background
+docker run -v /opt/dockerFile/tomcat/app.war:/usr/local/tomcat/webapps/app.war -d -p 8080:8080 tomcat
+52430661fadddd03d037392372dc696ccc99bb1e81f5a01b5205a1cce1a3ab29
+
+-i runs the command interactively 
+-t attaches a tty to it
+-d daemon
+
+
+add to docker file
+COPY /1.0-SNAPSHOT/my-app-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/myapp.war
+
+
+
+
+
