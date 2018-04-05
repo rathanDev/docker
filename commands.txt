@@ -1,4 +1,89 @@
 
+ref:
+https://docs.docker.com/get-started/
+
+
+
+
+---------------INSTALLATION---------------------------------------------------------------------------------
+
+
+sudo apt-get remove docker docker-engine docker.io
+sudo apt-get update
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+janarthan@janarthan1:/usr/local/share/ca-certificates$ sudo cp ~/softwares/Fortigate.cer .
+janarthan@janarthan1:/usr/local/share/ca-certificates$ ll
+total 12
+drwxr-xr-x 2 root root 4096 අප්‍රි   5 16:34 ./
+drwxr-xr-x 9 root root 4096 පෙබ   5 15:58 ../
+-rw-r--r-- 1 root root  987 අප්‍රි   5 16:34 Fortigate.cer
+janarthan@janarthan1:/usr/local/share/ca-certificates$ sudo update-ca-certificates --fresh
+Clearing symlinks in /etc/ssl/certs...
+done.
+Updating certificates in /etc/ssl/certs...
+148 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+
+$ sudo cp mycert.cer /usr/share/ca-certificates/mycert.pem
+$ sudo dpkg-reconfigure ca-certificates
+$ sudo update-ca-certificates
+$ git config --global http.sslCAInfo /usr/share/ca-certificates/mycert.pem
+
+janarthan@janarthan1:/usr/local/share/ca-certificates$ curl -k -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+OK
+janarthan@janarthan1:/usr/local/share/ca-certificates$  sudo apt-key fingerprint 0EBFCD88
+pub   4096R/0EBFCD88 2017-02-22
+      Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
+uid                  Docker Release (CE deb) <docker@docker.com>
+sub   4096R/F273FCD8 2017-02-22
+
+janarthan@janarthan1:/usr/local/share/ca-certificates$ sudo add-apt-repository \
+>    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+>    $(lsb_release -cs) \
+>    stable"
+
+sudo apt-get update
+
+apt-get install -y libltdl7 libseccomp2
+
+sudo apt-get install docker-ce
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+https://docs.docker.com/get-started/#prepare-your-docker-environment
+
+sudo dpkg -i docker-ce_18.03.0-ce-0-ubuntu_amd64.deb 
+
+docker --version
+
+janarthan@janarthan1:~$ docker ps
+Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+
+-- view history of commands executed
+cat ~/.bash_history
+
+--show groups for user
+groups janarthan
+> janarthan : janarthan adm cdrom sudo dip plugdev lpadmin sambashare
+
 navigate to the dir, then
 docker build --tag tomcat .
 
