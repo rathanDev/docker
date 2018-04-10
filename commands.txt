@@ -3,8 +3,6 @@ ref:
 https://docs.docker.com/get-started/
 
 
-
-
 ---------------INSTALLATION---------------------------------------------------------------------------------
 
 
@@ -56,15 +54,7 @@ apt-get install -y libltdl7 libseccomp2
 sudo apt-get install docker-ce
 
 
-
-
-
-
-
 -------------------------------------------------------------------------------------------------------------
-
-
-
 
 
 
@@ -126,10 +116,10 @@ docker run -it --rm -p 8888:8080 tomcat
 
 
 -in foreground
-docker run -v /opt/dockerFile/tomcat/app.war:/usr/local/tomcat/webapps/app.war -it -p 8080:8080 tomcat
+docker run -v /opt/wars/PWM.war:/usr/local/tomcat/webapps/PWM.war -it -p 8080:8080 tomcat
 -in background
-docker run -v /opt/dockerFile/tomcat/app.war:/usr/local/tomcat/webapps/app.war -d -p 8080:8080 tomcat
-52430661fadddd03d037392372dc696ccc99bb1e81f5a01b5205a1cce1a3ab29
+docker run -v /opt/wars/app.war:/usr/local/tomcat/webapps/app.war -d -p 8080:8080 tomcat
+132c3617c4cf
 
 -i runs the command interactively 
 -t attaches a tty to it
@@ -146,4 +136,36 @@ root@janarthan1:/home/janarthan# docker run hello-world
 Unable to find image 'hello-world:latest' locally
 docker: Error response from daemon: Get https://registry-1.docker.io/v2/: x509: certificate signed by unknown authority.
 See 'docker run --help'.
+
+------------------------------------------------------------------------
+
+sudo groupadd docker
+
+sudo usermod -aG docker $USER
+
+login and logout
+
+janarthan@janarthan1:~$ groups
+janarthan adm cdrom sudo dip plugdev lpadmin sambashare docker
+
+-------tomcat-----------------------------------------------------------
+
+docker run -v /opt/wars/app.war:/usr/local/tomcat/webapps/app.war -d -p 8080:8080 tomcat
+
+root@docker:/opt/dockerFile/tomcat# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES
+52430661fadd        tomcat              "catalina.sh run"   47 hours ago        Up 47 hours         0.0.0.0:8080->8080/tcp   practical_wiles
+
+root@docker:/opt/dockerFile/tomcat# docker exec -it practical_wiles bash
+root@52430661fadd:/usr/local/tomcat# ls
+LICENSE  NOTICE  RELEASE-NOTES	RUNNING.txt  bin  conf	include  lib  logs  native-jni-lib  temp  webapps  work
+
+docker logs <tomcatProcessName>
+
+
+docker run -v /opt/test/app.war:/usr/local/tomcat/webapps/app.war -d -p 8080:8080 tomcat
+
+docker start tomcat
+docker restart tomcat
+
 
