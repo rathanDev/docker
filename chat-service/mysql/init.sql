@@ -1,0 +1,13 @@
+CREATE TABLE users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255),
+    password VARCHAR(255)
+);
+
+CREATE TABLE messages (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    sender VARCHAR(255),
+    receiver VARCHAR(255),
+    content TEXT,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
